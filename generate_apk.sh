@@ -1,5 +1,12 @@
 #!/bin/bash
 
+# Display the banner
+echo "======================================="
+echo "          Android Payload Generator    "
+echo "               Author: Declanmidd     "
+echo "            GitHub: github.com/Declanmidd "
+echo "======================================="
+
 # Check if the correct number of arguments is provided
 if [ "$#" -ne 3 ]; then
     echo "Usage: $0 <LHOST> <LPORT> <TEMPLATE_APK>"
